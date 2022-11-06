@@ -26,22 +26,37 @@ body {
 
 /* Teams */
 .matches {
-  /* display: flex;
-  width: 100%;
-  align-items: center;
-  min-height: 100vh; */
+  position: relative;
+}
+.matches::before {
+  content: "";
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  right: 50px;
+  bottom: 50px;
+  background-image: url("../images/108-1081300_world-football-cup-background-with-trophy-free-vector.png");
+  z-index: -1;
+  filter: blur(4px);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.2;
+  filter: blur(4px);
 }
 .matches h1 {
-  font-size: 2rem;
+  font-size: 5rem;
   color: #fff;
   text-align: center;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
   margin: 0 auto;
+  background: -webkit-linear-gradient(#ffffff, #9e9e9e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-.matches h1 span {
-  font-size: 3rem;
-  display: block;
+@media (max-width: 767px) {
+  .matches h1 {
+    font-size: 3rem;
+  }
 }
 .matches .container {
   align-items: center;
@@ -174,14 +189,14 @@ figcaption {
   height: 100%;
 }
 .level-2:last-of-type .sub-level-groups {
-  height: 50%;
+  height: 56%;
 }
 .groups-left .level-2 {
   margin-left: 80px;
   margin-right: unset;
 }
 .level-2 .sub-level-groups {
-  height: 27%;
+  height: 29%;
   margin-top: 0;
 }
 .sub-level-team figcaption {
@@ -211,16 +226,21 @@ figcaption {
   color: #fff;
   font-size: 0.8rem;
 }
-
+.sub-level-groups::after,
 .sub-level-groups::before {
   position: absolute;
   content: "";
   top: 22px;
-  bottom: 20px;
+  height: 50%;
+  height: calc(50% - 10px);
   left: -3.8rem;
   background: #000;
   width: 2px;
   z-index: -1;
+}
+.sub-level-groups::after {
+  top: unset;
+  bottom: 20px;
 }
 
 .groups-right .sub-level-team:before {
@@ -230,6 +250,7 @@ figcaption {
   right: unset;
   left: -19px;
 }
+.groups-left .sub-level-groups::after,
 .groups-left .sub-level-groups::before {
   right: -3.8rem;
   left: unset;
@@ -264,6 +285,7 @@ figcaption {
   flex: 1;
   border: 2px solid #000;
   padding: 0 5px;
+  position: relative;
 }
 .final-level-champions {
   border: inherit;
@@ -275,10 +297,10 @@ figcaption {
 .final-level-champions:before {
   content: "";
   position: absolute;
-  bottom: -12px;
+  bottom: -13px;
   left: 50%;
   background: #000;
-  height: 11px;
+  height: 12px;
   width: 2px;
   z-index: -1;
 }
@@ -493,15 +515,18 @@ button#goNext:disabled {
     right: 0;
   }
   .sub-level-groups::before {
-    top: 12px;
-    bottom: 10px;
+    top: 14px;
+  }
+  .sub-level-groups::after {
+    bottom: 12px;
+    height: calc(50% - 10px);
   }
   .level-2 {
-    margin-right: 30px;
+    margin-right: 27px;
   }
   .groups-left .level-2 {
     margin-right: unset;
-    margin-left: 30px;
+    margin-left: 27px;
   }
 
   .matches figure.flag {
@@ -512,9 +537,9 @@ button#goNext:disabled {
   .matches figure.flag img {
     width: 30px;
     height: 21px;
-    padding: 3px;
   }
 
+  .sub-level-groups::after,
   .sub-level-groups::before {
     left: -1.95rem;
   }
@@ -522,6 +547,7 @@ button#goNext:disabled {
     right: -12px;
     z-index: -1;
   }
+  .groups-left .sub-level-groups::after,
   .groups-left .sub-level-groups::before {
     right: -1.95rem;
   }
@@ -532,4 +558,113 @@ button#goNext:disabled {
   .final-level-champions {
     transform: translateY(-60px) scale(1.5);
   }
+}
+
+@media (max-width: 575px) {
+  .groups-left .level-2 {
+    margin-left: 0;
+  }
+  .groups-right .level-2 {
+    margin-right: 0;
+  }
+  .level-2 .sub-level-team:before {
+    right: -12px;
+    width: 12px;
+  }
+  .groups-right .level-2 .sub-level-team:before {
+    left: -12px;
+  }
+  .groups-left .level-2 .sub-level-groups::after,
+  .groups-left .level-2 .sub-level-groups::before {
+    right: -12px;
+    left: unset;
+  }
+  .level-2 .sub-level-groups::after,
+  .level-2 .sub-level-groups::before {
+    left: -12px;
+  }
+  .level-2 .sub-level-team::after {
+    display: none;
+  }
+}
+
+/* Active path  */
+.final-level-groups.active-path {
+  border-color: transparent;
+}
+.final-level-groups.active-path.right:before,
+.final-level-groups.active-path.right:after,
+.final-level-groups.active-path.left:before,
+.final-level-groups.active-path.left:after {
+  opacity: 1;
+}
+
+.final-level-groups.active-path:before,
+.final-level-groups.active-path::after {
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 4px);
+  height: 2px;
+  background: #000;
+  content: "";
+  z-index: 9;
+  opacity: 0;
+}
+.final-level-groups.active-path:before {
+  left: 8px;
+}
+.final-level-groups.active-path:after {
+  right: 8px;
+}
+.final-level-groups.active-path.left:before,
+.final-level-groups.active-path.right:after {
+  background: #ff0;
+}
+
+.final-level-champions.active-path {
+  border-color: #ff0;
+  z-index: 9;
+}
+.final-level-champions.active-path:before {
+  background-color: #ff0;
+  z-index: 9;
+  height: 23px;
+  bottom: -25px;
+}
+.sub-level-groups.active-path.top::before {
+  z-index: 9;
+  background-color: #ff0;
+}
+.sub-level-groups.active-path.bottom::after {
+  z-index: 9;
+  background-color: #ff0;
+}
+.sub-level-team.active-path:before,
+.sub-level-team.active-path:after {
+  z-index: 9;
+  background-color: #ff0;
+}
+
+.active-path .flag {
+  z-index: 99;
+  position: relative;
+}
+.final-level-groups.active-path.left .final-level-team:first-of-type img,
+.final-level-groups.active-path.right .final-level-team:last-of-type img,
+.sub-level-team.active-path img {
+  border: 3px solid #ff0;
+}
+
+.matches.finished {
+  pointer-events: none;
+}
+.matches.finished .top-level,
+.matches.finished .sub-level-groups.active-path.top::after,
+.matches.finished .sub-level-groups.active-path.bottom::before,
+.matches.finished .final-level-groups.active-path.right::before,
+.matches.finished .final-level-groups.active-path.left:after,
+.matches.finished .sub-level-team:not(.active-path),
+.matches.finished .sub-level-groups:not(.active-path),
+.matches.finished .final-level-groups:not(.active-path) {
+  opacity: 0.3;
 }

@@ -73,6 +73,35 @@ function addToGroup2(key, img, level) {
 function addToChampions(img) {
   champions.push(img.src);
   document.getElementById(`champions`).setAttribute("src", img.src);
+  document.querySelectorAll(".sub-level img").forEach((image) => {
+    if (image.src == img.src) {
+      image.offsetParent.classList.add("active-path");
+      let parent = image.offsetParent;
+      let groupParent = parent.parentElement.parentElement.parentElement;
+      if (
+        document.querySelector(
+          `#${groupParent.id} .sub-level-team:first-of-type img`
+        ).src == img.src
+      ) {
+        groupParent.classList.add("active-path", "top");
+      } else {
+        groupParent.classList.add("active-path", "bottom");
+      }
+    }
+  });
+  let championsGroup = document.querySelector(".final-level-groups");
+  if (
+    document.querySelector(
+      ".final-level-groups .final-level-team:first-of-type img"
+    ).src == img.src
+  ) {
+    championsGroup.classList.add("active-path", "left");
+  } else {
+    championsGroup.classList.add("active-path", "right");
+  }
+
+  document.querySelector(".matches").classList.add('finished');
+  document.querySelector(".final-level-champions").classList.add("active-path");
 }
 window.addEventListener("DOMContentLoaded", () => {
   for (let i = 1; i < 9; i++) {
