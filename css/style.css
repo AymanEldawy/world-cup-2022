@@ -425,11 +425,11 @@ main h2 {
 #goNext a {
   color: inherit;
   text-decoration: none;
+  display: block;
+  padding: 1rem;
 }
 #goNext:disabled a {
   pointer-events: none;
-  display: block;
-  padding: 1rem;
 }
 button#goNext:disabled {
   opacity: 0.8;

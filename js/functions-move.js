@@ -66,7 +66,6 @@ function addToGroup4(key, img, level) {
 }
 
 function addToGroup2(key, img, level) {
-  console.log(key, level);
   GROUP2[key] = img.src;
   moveImageToNext(GROUP2);
 }
@@ -88,15 +87,10 @@ window.addEventListener("DOMContentLoaded", () => {
         let checkIfTeamIsReady = groupsFilter.filter(
           (img) => img.getAttribute("src") !== ""
         );
-        console.log(checkIfTeamIsReady);
         if (img.getAttribute("src") && checkIfTeamIsReady.length > 1)
           addToGroup8(`level2-${i}`, img, i);
       });
     });
-    /**
-     * ! Some Error here
-     *
-     * */
   }
   for (let i = 1; i < 5; i++) {
     let groups = Array.from(document.querySelectorAll(`#subGroup${i} img`));
@@ -108,18 +102,11 @@ window.addEventListener("DOMContentLoaded", () => {
         let checkIfTeamIsReady = groupsFilter.filter(
           (img) => img.getAttribute("src") !== ""
         );
-        console.log(checkIfTeamIsReady);
-        console.log(i);
         if (img.getAttribute("src") && checkIfTeamIsReady.length > 1)
           addToGroup4(`level3-${i}`, img, i);
       });
     });
   }
-
-  /**
-   * ! Some Error here
-   *
-   * */
   for (let i = 1; i < 3; i++) {
     let groups = Array.from(document.querySelectorAll(`#sub3Group${i} img`));
     let checkIfTeamIsReady = groups.filter(
@@ -133,7 +120,6 @@ window.addEventListener("DOMContentLoaded", () => {
         let checkIfTeamIsReady = groupsFilter.filter(
           (img) => img.getAttribute("src") !== ""
         );
-        console.log(checkIfTeamIsReady);
         if (img.getAttribute("src") && checkIfTeamIsReady.length > 1)
           addToGroup2(`final-${i}`, img, index);
       });
@@ -151,7 +137,6 @@ window.addEventListener("DOMContentLoaded", () => {
       let checkIfTeamIsReady = finalGroupFilter.filter(
         (img) => img.getAttribute("src") !== ""
       );
-      console.log(checkIfTeamIsReady);
       // push to group 2
       if (img.getAttribute("src") && checkIfTeamIsReady.length > 1)
         addToChampions(img);

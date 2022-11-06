@@ -44,6 +44,13 @@ function chooseTeam(label) {
   let count = 1;
   // Has class
   if (label.classList.contains("active")) {
+    let indexInGroup = document.querySelector(
+      `label[for="${label.getAttribute("for")}"] span`
+    ).textContent; // get Index group
+    delete group16[indexInGroup]; // remove item
+    if (!(Object.keys(group16).length > 15)) {
+      document.getElementById("goNext").setAttribute("disabled", "");
+    }
     label.classList.remove("active");
     count = count > 0 ? 0 : count - 1;
     document
@@ -67,7 +74,7 @@ function chooseTeam(label) {
     }
     if (count < 3) {
       let span = document.createElement("span");
-      span.textContent = `${groupAlpha} ${count}`;
+      span.textContent = `${groupAlpha}${count}`;
       label.append(span);
       label.classList.toggle("active");
     }
@@ -85,18 +92,25 @@ function chooseTeam(label) {
     let imgPath = document.querySelector(
       `label[for="${label.getAttribute("for")}"] img`
     ).src;
-    let dynamicKey = `${groupAlpha}-${count}-${label.getAttribute(
-      "for"
-    )}-${imgPath}`;
+    let dynamicKey = {
+      group: groupAlpha,
+      index: count,
+      flag: imgPath,
+      team: label.getAttribute("for"),
+    };
     addToGroup16(dynamicKey);
   }
 }
 
 function addToGroup16(group) {
-  let info = group.split("-");
-  let dynamicKey = info[0] + info[1];
-  group16[dynamicKey] = { group: info[0], team: info[2], flag: info[3] };
-  if (Object.keys(group16).length == 16) {
+  let dynamicKey = group.group + group.index;
+  group16[dynamicKey] = {
+    group: group.group,
+    team: group.team,
+    flag: group.flag,
+  };
+
+  if (Object.keys(group16).length > 15) {
     storage.save(group16);
     document.getElementById("goNext").removeAttribute("disabled");
   }
