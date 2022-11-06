@@ -20,6 +20,12 @@ const GROUP2 = {
   "final-2": "",
 };
 
+let audio = new Audio();
+const playSound = (src) => {
+  audio.src = src;
+  audio.play();
+};
+
 function addToGroup8(key, img, level) {
   let oldPath = GROUP8[key];
   GROUP8[key] = img.src;
@@ -71,6 +77,7 @@ function addToGroup2(key, img, level) {
 }
 
 function addToChampions(img) {
+  playSound("sound/end-game.wav");
   champions.push(img.src);
   document.getElementById(`champions`).setAttribute("src", img.src);
   document.querySelectorAll(".sub-level img").forEach((image) => {
@@ -100,7 +107,7 @@ function addToChampions(img) {
     championsGroup.classList.add("active-path", "right");
   }
 
-  document.querySelector(".matches").classList.add('finished');
+  document.querySelector(".matches").classList.add("finished");
   document.querySelector(".final-level-champions").classList.add("active-path");
 }
 window.addEventListener("DOMContentLoaded", () => {
@@ -174,6 +181,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function moveImageToNext(group) {
+  playSound("sound/game-notification.wav");
   for (let team in group) {
     if (group[team] != "") {
       document.getElementById(`${team}`).setAttribute("src", group[team]);
