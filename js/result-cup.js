@@ -12,6 +12,9 @@ import {
 } from "./Teams.js";
 import { createTeamItem, displayTeamGroup } from "./UI.js";
 
+import * as html2Canvas from "./html2canvas.js";
+
+console.log(html2Canvas);
 const groups = storage.fetch();
 
 window.addEventListener("DOMContentLoaded", () => {

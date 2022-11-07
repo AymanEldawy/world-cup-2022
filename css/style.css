@@ -12,7 +12,7 @@
 }
 body {
   font-family: "Gemunu Libre", sans-serif;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: var(--bg-color);
   padding-bottom: 2rem;
 }
@@ -45,18 +45,7 @@ body {
   background-position: center;
   background-size: contain;
 }
-.matches.finished::after {
-  content: "";
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  right: 50px;
-  bottom: 50px;
-  z-index: -1;
-  opacity: 0.3;
-  background-position: center center;
-  background-image: url(https://archive.org/download/19513106/19513106.gif);
-}
+
 .matches h1 {
   font-size: 5rem;
   color: #fff;
@@ -67,6 +56,13 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.matches h1.remove-style {
+  background: none;
+  color: #fff;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
 @media (max-width: 767px) {
   .matches h1 {
     font-size: 3rem;
@@ -82,7 +78,6 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  height: 90vh;
 }
 .top-level {
   /* display: none; */
@@ -187,6 +182,7 @@ figcaption {
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+  gap: 2rem;
 }
 .sub-level-groups {
   position: relative;
@@ -517,7 +513,6 @@ button#goNext:disabled {
   .group-container {
     padding: 0.25rem;
     margin-top: 2rem;
-    margin-bottom: 1rem;
   }
   .group-container:before {
     top: -17px;
@@ -572,6 +567,16 @@ button#goNext:disabled {
   .final-level-champions {
     transform: translateY(-60px) scale(1.5);
   }
+  .groups-right .level-2,
+  .groups-left .level-2 {
+    gap: 100px;
+  }
+  .level-2 .sub-level-groups {
+    height: 130px;
+  }
+  .level-2:last-of-type .sub-level-groups {
+    height: 220px;
+  }
 }
 
 @media (max-width: 575px) {
@@ -584,6 +589,9 @@ button#goNext:disabled {
   .level-2 .sub-level-team:before {
     right: -12px;
     width: 12px;
+  }
+  .sub-level {
+    gap: 1rem;
   }
   .groups-right .level-2 .sub-level-team:before {
     left: -12px;
@@ -599,6 +607,36 @@ button#goNext:disabled {
   }
   .level-2 .sub-level-team::after {
     display: none;
+  }
+  .sub-level-team::after {
+    right: -15px;
+  }
+  .groups-right .sub-level-team::after {
+    left: -15px;
+  }
+}
+@media (min-width: 1000px) {
+  .matches .container {
+    transform: translateY(-60px);
+  }
+  .groups-right .level-2,
+  .groups-left .level-2 {
+    gap: 100px;
+  }
+  .level-2 .sub-level-groups {
+    height: 160px;
+  }
+  .level-2:last-of-type .sub-level-groups {
+    height: 220px;
+  }
+  .sub-level {
+    gap: 1.5rem;
+  }
+  .sub-level-team:first-of-type {
+    margin: 0;
+  }
+  .sub-level-groups {
+    min-height: 115px;
   }
 }
 
@@ -681,5 +719,5 @@ button#goNext:disabled {
 .matches.finished .sub-level-team:not(.active-path),
 .matches.finished .sub-level-groups:not(.active-path),
 .matches.finished .final-level-groups:not(.active-path) {
-  opacity: 0.3;
+  opacity: 0.8;
 }

@@ -6,6 +6,15 @@ export const storage = {
   save: (data) => {
     localStorage.setItem("world_cup_teams", JSON.stringify(data));
   },
+  fetchCanvas: () => {
+    let world_cup_teams_canvas = JSON.parse(
+      localStorage.getItem("world_cup_teams_canvas")
+    );
+    return world_cup_teams_canvas ? world_cup_teams_canvas : "";
+  },
+  saveCanvas: (data) => {
+    localStorage.setItem("world_cup_teams_canvas", JSON.stringify(data));
+  },
 };
 
 export const TEAMS = [

@@ -1,3 +1,5 @@
+import { storage } from "./Teams.js";
+
 const champions = [];
 const GROUP8 = {
   "level2-1": "",
@@ -18,12 +20,6 @@ const GROUP4 = {
 const GROUP2 = {
   "final-1": "",
   "final-2": "",
-};
-
-let audio = new Audio();
-const playSound = (src) => {
-  audio.src = src;
-  audio.play();
 };
 
 function addToGroup8(key, img, level) {
@@ -77,7 +73,6 @@ function addToGroup2(key, img, level) {
 }
 
 function addToChampions(img) {
-  playSound("sound/end-game.wav");
   champions.push(img.src);
   document.getElementById(`champions`).setAttribute("src", img.src);
   document.querySelectorAll(".sub-level img").forEach((image) => {
@@ -109,6 +104,7 @@ function addToChampions(img) {
 
   document.querySelector(".matches").classList.add("finished");
   document.querySelector(".final-level-champions").classList.add("active-path");
+  saveHtml2Image();
 }
 window.addEventListener("DOMContentLoaded", () => {
   for (let i = 1; i < 9; i++) {
@@ -181,12 +177,20 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function moveImageToNext(group) {
-  playSound("sound/game-notification.wav");
   for (let team in group) {
     if (group[team] != "") {
       document.getElementById(`${team}`).setAttribute("src", group[team]);
     }
   }
+}
+
+async function saveHtml2Image() {
+  console.log('run...')
+  document.querySelector(".matches h1").classList.add("remove-style");
+  const canvas = await html2canvas(document.body);
+  const image = await canvas.toDataURL("image/png");
+  storage.saveCanvas(image);
+  location.pathname.replace("qr-page.html");
 }
 
 // console.log(team);
