@@ -185,9 +185,12 @@ function moveImageToNext(group) {
 }
 
 async function saveHtml2Image() {
-  console.log('run...')
+  console.log("run...");
   document.querySelector(".matches h1").classList.add("remove-style");
   const canvas = await html2canvas(document.body);
+  const url = canvas.toDataURL();
+  document.body.innerHTML += `<a href="${url}" target="_blank" download="image.png">Download</a>`;
+  console.log(url);
   const image = await canvas.toDataURL("image/png");
   storage.saveCanvas(image);
   location.pathname.replace("qr-page.html");
