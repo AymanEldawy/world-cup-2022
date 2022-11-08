@@ -4,16 +4,32 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fifa World Cup 2023</title>
+    <title>FIFA World Cup 2023</title>
     <link rel="stylesheet" href="css/style.css" />
+    <meta property="og:title" content="Sport Guessing" />
+    <meta
+      property="og:description"
+      content="Guess who will win FIFA World Cup QATAR 2022 !"
+    />
+    <meta property="og:image" content="/images/logo.png" />
   </head>
   <body>
+    <nav>
+      <div class="container">
+        <h3>
+          <a href="/"><img src="images/logo.png" />Sport Guessing </a>
+        </h3>
+        <p>FIFA World Cup Qatar 2022</p>
+      </div>
+    </nav>
+    <div class="container">
+      <section class="most-teams best-four">
+        <div class="teams"></div>
+        <a href="results.html">Show more</a>
+      </section>
+    </div>
     <div class="home-page">
-      <main>
-        <h1>FiFA World Cup Qatar 2022 Bracket</h1>
-        <h2>Groups</h2>
-      </main>
-      <h3>Select 2 teams from each group to knockouts</h3>
+      <h3 class="title-style">Select 2 teams from each group to knockouts</h3>
       <div class="container">
         <div class="groups">
           <div class="group-A" data-group="Group A">
@@ -54,6 +70,13 @@
         <a href="game-cup.html">Go knockouts</a>
       </button>
     </div>
+
+    <footer>
+      <div class="container">
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact us</a>
+      </div>
+    </footer>
     <script src="js/main.js" type="module"></script>
   </body>
 </html>

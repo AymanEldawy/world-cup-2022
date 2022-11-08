@@ -1,3 +1,4 @@
+import { getChampions } from "./firebase.config.js";
 import {
   GroupA,
   GroupB,
@@ -13,6 +14,8 @@ import {
 import { displayGroupChecker, displayTeamGroup } from "./UI.js";
 
 window.addEventListener("DOMContentLoaded", () => {
+  getChampions();
+  displayMostFourTeams();
   // Display groups
   displayGroupChecker(".groups .group-A #group", GroupA);
   displayGroupChecker(".groups .group-B #group", GroupB);
@@ -113,5 +116,65 @@ function addToGroup16(group) {
   if (Object.keys(group16).length > 15) {
     storage.save(group16);
     document.getElementById("goNext").removeAttribute("disabled");
+  }
+}
+
+export function sortChampions() {
+  let teams = storage.fetchTeams();
+  let sortedChampions = {};
+  for (let team in teams) {
+    sortedChampions[`${teams[team].count}-${teams[team].team}`] = teams[team];
+  }
+
+  console.log(sortedChampions);
+  let sortedChampionsIndex = Object.keys(sortedChampions).sort((a, b) => {
+    console.log(+b.split("-")[0], +a.split("-")[0]);
+    console.log(b, a) + b.split("-")[0], +a.split("-")[0];
+  });
+  console.log(sortedChampionsIndex);
+
+  return {
+    sortedChampions,
+    sortedChampionsIndex,
+  };
+}
+
+export function createChampionItem(champion, length) {
+  let div = document.createElement("div");
+  div.className = "most-teams-item";
+  console.log(champion);
+  div.innerHTML = `
+  <img src=${champion.flag} />
+  <h3>${champion.team.replace("%20", " ")}</h3>
+  <span>${calculationPercent(champion.count, length)}</span>`;
+
+  return div;
+}
+
+export function calculationPercent(count, length) {
+  return Math.round((count / length) * 100) + " %";
+}
+
+function displayMostFourTeams() {
+  let teams = storage.fetchTeams();
+  console.table(teams);
+  let { sortedChampions, sortedChampionsIndex } = sortChampions();
+  let len = Object.keys(teams).length;
+  if (document.querySelector(".best-four")) {
+    if (len > 4) {
+      for (let i = 0; i < 4; i++) {
+        document
+          .querySelector(".teams")
+          .append(
+            createChampionItem(sortedChampions[sortedChampionsIndex[i]], len)
+          );
+      }
+    } else {
+      for (let team in teams) {
+        document
+          .querySelector(".teams")
+          .append(createChampionItem(teams[team]));
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { addChampions } from "./firebase.config.js";
 import { storage } from "./Teams.js";
 
 const champions = [];
@@ -74,6 +75,7 @@ function addToGroup2(key, img, level) {
 
 function addToChampions(img) {
   champions.push(img.src);
+  addChampions(img.src);
   document.getElementById(`champions`).setAttribute("src", img.src);
   document.querySelectorAll(".sub-level img").forEach((image) => {
     if (image.src == img.src) {
@@ -104,7 +106,6 @@ function addToChampions(img) {
 
   document.querySelector(".matches").classList.add("finished");
   document.querySelector(".final-level-champions").classList.add("active-path");
-  saveHtml2Image();
 }
 window.addEventListener("DOMContentLoaded", () => {
   for (let i = 1; i < 9; i++) {
@@ -184,20 +185,4 @@ function moveImageToNext(group) {
   }
 }
 
-async function saveHtml2Image() {
-  console.log("run...");
-  document.querySelector(".matches h1").classList.add("remove-style");
-  const canvas = await html2canvas(document.body);
-  const url = canvas.toDataURL();
-  document.body.innerHTML += `<a href="${url}" target="_blank" download="image.png">Download</a>`;
-  console.log(url);
-  const image = await canvas.toDataURL("image/png");
-  storage.saveCanvas(image);
-  location.pathname.replace("qr-page.html");
-}
 
-// console.log(team);
-// let teamImg = group[team].split("/");
-// let imgName = teamImg.pop();
-// let alt = imgName.split(".")[0];
-// console.log(teamImg, imgName, alt);

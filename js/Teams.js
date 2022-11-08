@@ -15,6 +15,13 @@ export const storage = {
   saveCanvas: (data) => {
     localStorage.setItem("world_cup_teams_canvas", JSON.stringify(data));
   },
+  fetchTeams: () => {
+    let world_teams = JSON.parse(localStorage.getItem("world_teams"));
+    return world_teams ? world_teams : "";
+  },
+  saveTeams: (data) => {
+    localStorage.setItem("world_teams", JSON.stringify(data));
+  },
 };
 
 export const TEAMS = [
@@ -258,26 +265,3 @@ export const GroupE = TEAMS.filter((team) => team.group === "E");
 export const GroupF = TEAMS.filter((team) => team.group === "F");
 export const GroupG = TEAMS.filter((team) => team.group === "G");
 export const GroupH = TEAMS.filter((team) => team.group === "H");
-
-// All championss
-const championss = [{ team: "", count: 1 }];
-// Check if championss exist
-// => plus +1
-// => put
-
-// Function go to next level
-// Push to 16
-const groupOf16 = [];
-// Push to 8
-const groupOf8 = [];
-// Push to 4
-const groupOf4 = [];
-// Push to 2
-const groupOf2 = [];
-// Push to 1
-const groupOf1 = [];
-
-// Convert body to image
-// Share image or Qr code
-
-// Save championss in database
