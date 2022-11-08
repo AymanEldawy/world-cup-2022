@@ -74,7 +74,7 @@ function addToGroup2(key, img, level) {
 }
 
 function addToChampions(img) {
-  champions.push(img.src);
+  champions.push(img.src.replace(location.origin, ""));
   addChampions(img.src);
   document.getElementById(`champions`).setAttribute("src", img.src);
   document.querySelectorAll(".sub-level img").forEach((image) => {
@@ -103,9 +103,7 @@ function addToChampions(img) {
   } else {
     championsGroup.classList.add("active-path", "right");
   }
-
-  document.querySelector(".matches").classList.add("finished");
-  document.querySelector(".final-level-champions").classList.add("active-path");
+  saveAsLink();
 }
 window.addEventListener("DOMContentLoaded", () => {
   for (let i = 1; i < 9; i++) {
@@ -185,4 +183,19 @@ function moveImageToNext(group) {
   }
 }
 
+async function saveAsLink() {
+  document.querySelector(".matches").classList.add("finished");
+  document.querySelector(".final-level-champions").classList.add("active-path");
+  const canvas = await html2canvas(document.querySelector(".matches"), {
+    allowTaint: false,
+    useCORS: true,
+  });
+  const link = await canvas.toDataURL("image/png");
+  document.querySelector(".game-options").classList.remove("hide");
+  document.getElementById("download").href = link;
+}
 
+function copyText() {
+  navigator.clipboard.writeText(document.getElementById("download").href);
+}
+document.getElementById("copy").addEventListener("click", copyText);

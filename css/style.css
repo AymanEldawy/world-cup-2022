@@ -64,8 +64,34 @@ nav a img {
   border-radius: 50%;
 }
 /* Teams */
+.game-options {
+  text-align: center;
+  max-width: 400px;
+  margin: 1rem auto 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.game-options a,
+.game-options button {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
+.game-options a:first-of-type {
+  color: #fff;
+  background: #4caf50;
+}
+.game-options button {
+  border: none;
+  cursor: copy;
+  margin-left: 0.5rem;
+}
+.game-options.hide {
+  opacity: 0;
+  pointer-events: none;
+  max-height: 0;
+}
 .matches {
-  margin-top: 2rem;
+  margin-top: 1rem;
   position: relative;
 }
 
@@ -184,6 +210,11 @@ section.most-teams a {
   text-align: center;
   padding: 0.5rem;
   color: #fff;
+}
+.best-four .title-style {
+  font-size: 1.8rem;
+  margin: 0;
+  margin-bottom: .5rem;
 }
 
 .groups {
@@ -793,6 +824,9 @@ figcaption {
 .matches.finished {
   pointer-events: none;
 }
+.matches.finished .container::before {
+  display: none;
+}
 .matches.finished .top-level,
 .matches.finished .sub-level-groups.active-path.top::after,
 .matches.finished .sub-level-groups.active-path.bottom::before,
@@ -832,4 +866,15 @@ figcaption {
   max-width: 400px;
   margin: 0 auto;
   line-height: 1.4;
+}
+
+.back {
+  margin: 1.5rem auto 0 0;
+  display: block;
+  max-width: 200px;
+  background: #fff;
+  color: #f00;
+  padding: 0.5rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
 }

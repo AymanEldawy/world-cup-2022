@@ -70,14 +70,21 @@ function chooseTeam(label) {
       }
     }
   } else {
+    let index = "";
     for (let sibling of siblings) {
       if (sibling.classList.contains("active")) {
+        index = document.querySelector(
+          `label.active[data-group=${sibling.dataset.group}] span`
+        ).textContent;
         count++;
       }
     }
     if (count < 3) {
+      let indexCount = "";
+      indexCount =
+        index === `${groupAlpha}1` ? `${groupAlpha}2` : `${groupAlpha}1`;
       let span = document.createElement("span");
-      span.textContent = `${groupAlpha}${count}`;
+      span.textContent = indexCount;
       label.append(span);
       label.classList.toggle("active");
     }
@@ -121,28 +128,19 @@ function addToGroup16(group) {
 
 export function sortChampions() {
   let teams = storage.fetchTeams();
-  let sortedChampions = {};
-  for (let team in teams) {
-    sortedChampions[`${teams[team].count}-${teams[team].team}`] = teams[team];
+  let teamsList = [];
+
+  for (let team of Object.keys(teams)) {
+    teamsList.push(teams[team]);
   }
+  teamsList.sort((a, b) => b.count - a.count);
 
-  console.log(sortedChampions);
-  let sortedChampionsIndex = Object.keys(sortedChampions).sort((a, b) => {
-    console.log(+b.split("-")[0], +a.split("-")[0]);
-    console.log(b, a) + b.split("-")[0], +a.split("-")[0];
-  });
-  console.log(sortedChampionsIndex);
-
-  return {
-    sortedChampions,
-    sortedChampionsIndex,
-  };
+  return teamsList;
 }
-
+sortChampions();
 export function createChampionItem(champion, length) {
   let div = document.createElement("div");
   div.className = "most-teams-item";
-  console.log(champion);
   div.innerHTML = `
   <img src=${champion.flag} />
   <h3>${champion.team.replace("%20", " ")}</h3>
@@ -156,24 +154,18 @@ export function calculationPercent(count, length) {
 }
 
 function displayMostFourTeams() {
-  let teams = storage.fetchTeams();
-  console.table(teams);
-  let { sortedChampions, sortedChampionsIndex } = sortChampions();
-  let len = Object.keys(teams).length;
+  let teams = sortChampions();
+  let len = teams.length;
   if (document.querySelector(".best-four")) {
     if (len > 4) {
       for (let i = 0; i < 4; i++) {
         document
           .querySelector(".teams")
-          .append(
-            createChampionItem(sortedChampions[sortedChampionsIndex[i]], len)
-          );
+          .append(createChampionItem(teams[i], len));
       }
     } else {
-      for (let team in teams) {
-        document
-          .querySelector(".teams")
-          .append(createChampionItem(teams[team]));
+      for (let team of teams) {
+        document.querySelector(".teams").append(createChampionItem(team));
       }
     }
   }

@@ -2,18 +2,11 @@ import { createChampionItem, sortChampions } from "./main.js";
 import { storage } from "./Teams.js";
 
 window.addEventListener("DOMContentLoaded", () => {
-  let teams = storage.fetchTeams();
-  console.log(Object.keys(teams).length)
-  let { sortedChampions, sortedChampionsIndex } = sortChampions();
-  console.log(teams);
-  let len = Object.keys(sortedChampions).length;
-  console.log(len, Object.keys(sortedChampions).length)
-  for (let i = 0; i < Object.keys(sortedChampions).length; i++) {
-    console.log("run...");
+  let teams = sortChampions();
+  let len = teams.length;
+  for (const team of teams) {
     document
       .querySelector(".results .teams")
-      .append(
-        createChampionItem(sortedChampions[sortedChampionsIndex[i]], len)
-      );
+      .append(createChampionItem(team, len));
   }
 });

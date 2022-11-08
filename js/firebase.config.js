@@ -53,5 +53,4 @@ const getResults = (listTeams) => {
   }
   storage.saveTeams(champions);
 
-  // console.log(Object.keys(champions))
 };

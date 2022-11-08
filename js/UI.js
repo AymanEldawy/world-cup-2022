@@ -38,7 +38,6 @@ const createGroupChecker = (team) => {
 
 export const displayGroupChecker = (selector, group) => {
   if (document.querySelector("#group")) {
-    console.log(selector);
     let element = document.querySelector(selector);
     for (let team of group) {
       element.append(createGroupChecker(team));
