@@ -141,11 +141,15 @@ section.results {
 section.most-teams:not(.results) {
   margin: 0 auto;
   margin: 2rem auto 1rem;
+  max-width:100%;
 }
 section.most-teams .teams {
   display: grid;
- grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1rem;
+  overflow-x: auto;
+  max-width:100%;
+  
 }
 section.most-teams.results .teams {
   display: flex;
