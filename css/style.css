@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300;400;500;600;700&display=swap");
 :root {
-  /* --bg-color: #ff2424; */
   --bg-color: #9a0e15;
-  /* --box-shadow: 2px 2px 10px #7d1212, -2px -2px 10px #ff3636; */
   --box-shadow: 1px 1px 2px #4b070a, -1px -1px 2px #e91520;
 }
 * {
@@ -12,9 +10,21 @@
 }
 body {
   font-family: "Gemunu Libre", sans-serif;
-  /* min-height: 100vh; */
   background: var(--bg-color);
 }
+::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+::-webkit-scrollbar-track {
+  box-shadow: var(--box-shadow);
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: var(-bg-color);
+  outline: 1px solid slategrey;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
