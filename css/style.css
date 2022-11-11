@@ -13,7 +13,8 @@ body {
   background: var(--bg-color);
 }
 ::-webkit-scrollbar {
-  width: 1em;
+  width: .4em;
+  height: .4em;
 }
  
 ::-webkit-scrollbar-track {
@@ -21,8 +22,8 @@ body {
 }
  
 ::-webkit-scrollbar-thumb {
-  background-color: var(-bg-color);
-  outline: 1px solid slategrey;
+    background-color: var(--bg-color);
+    outline: 1px solid #400602;
 }
 
 .container {
